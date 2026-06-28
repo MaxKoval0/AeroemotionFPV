@@ -6,6 +6,32 @@
     el.href = `https://wa.me/${WHATSAPP_NUMBER}${text ? `?text=${text}` : ''}`;
   });
 
+  /* A short, single pulse only on the moments that matter (tier switch,
+     form submit) — never repeated or used decoratively, per the usual
+     guidance against overusing vibration. No-ops silently on devices/
+     browsers without the API (most desktop browsers included). */
+  function haptic(ms = 8) {
+    if (navigator.vibrate) navigator.vibrate(ms);
+  }
+
+  /* Scroll progress bar (visible on mobile only, via CSS) */
+  const scrollProgress = document.querySelector('.scroll-progress');
+  if (scrollProgress) {
+    let progressTicking = false;
+    const updateScrollProgress = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = scrollable > 0 ? Math.min(100, (window.scrollY / scrollable) * 100) : 0;
+      scrollProgress.style.width = `${pct}%`;
+      progressTicking = false;
+    };
+    updateScrollProgress();
+    window.addEventListener('scroll', () => {
+      if (progressTicking) return;
+      progressTicking = true;
+      requestAnimationFrame(updateScrollProgress);
+    }, { passive: true });
+  }
+
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* (hover: hover) and (pointer: fine) alone is unreliable: a desktop browser
      window just resized narrow still reports a real mouse, so cursor-driven
@@ -133,16 +159,11 @@
     };
 
     const resize = () => {
-      const rect = heroEl.getBoundingClientRect();
-      width = rect.width;
-      height = rect.height;
-      /* Visual size is left to CSS (position:absolute; inset:0) so the
-         canvas element always tracks the hero box with zero lag, even
-         between resize() calls. Only the drawing-buffer resolution (which
-         just affects sharpness, not position) is set here. */
-      heroCanvas.width = width * dpr;
-      heroCanvas.height = height * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      /* Resolution is kept in sync continuously by syncCanvasResolution()
+         inside the draw loop. This only needs to handle the parts that
+         should stay rare: re-measuring where the heading sits, and
+         reshuffling the particle field to match. */
+      syncCanvasResolution();
       const contentEl = heroEl.querySelector('.hero__content');
       if (contentEl && height > 0) {
         const rootFS = parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -167,7 +188,28 @@
       ctx.restore();
     };
 
+    const syncCanvasResolution = () => {
+      /* .hero uses min-height:100dvh, which tracks the *live* visual
+         viewport — it genuinely changes height as the mobile browser's
+         address bar collapses/expands mid-scroll, not just once at the
+         end. The canvas's CSS size follows that instantly (pure CSS), but
+         its drawing-buffer resolution only matches what this set last —
+         if that goes stale even briefly, the existing bitmap gets stretched
+         to fill the new CSS size, which reads as the particles "drifting".
+         Checking every frame (cheap: no particle rebuild, just a resize of
+         the buffer) keeps the buffer pixel-matched continuously, so there's
+         never a stretched frame to see. */
+      const rect = heroEl.getBoundingClientRect();
+      if (Math.abs(rect.width - width) < 0.5 && Math.abs(rect.height - height) < 0.5) return;
+      width = rect.width;
+      height = rect.height;
+      heroCanvas.width = width * dpr;
+      heroCanvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
     const draw = (t) => {
+      syncCanvasResolution();
       ctx.clearRect(0, 0, width, height);
 
       if (canHover && pointer.x > -999) {
@@ -610,6 +652,7 @@
   function setTier(tier) {
     const prevTier = demoStage.dataset.tierStage;
     const prevLaptopMediaKey = prevTier === '1' ? '1' : '2';
+    if (prevTier !== tier) haptic();
 
     tierTabs.forEach((tab) => {
       const active = tab.dataset.tier === tier;
@@ -721,5 +764,6 @@
       return;
     }
     form.classList.add('is-submitted');
+    haptic(12);
   });
 })();

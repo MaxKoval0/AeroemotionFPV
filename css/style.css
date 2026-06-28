@@ -69,6 +69,23 @@ p { margin: 0; }
   90% { background-position: -67px 24px; }
 }
 
+/* Desktop has the nav-underline scroll-spy for orientation; mobile loses
+   all of that the moment the hamburger menu closes, on a page long enough
+   that "how much is left" is a real question. A thin persistent bar
+   answers it without taking any attention. */
+@media (max-width: 900px) {
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, #d3b27c, #f0d9a8);
+    z-index: 95;
+    pointer-events: none;
+  }
+}
+
 .wrap {
   width: 100%;
   max-width: 1280px;
@@ -101,6 +118,10 @@ p { margin: 0; }
 .section-head { max-width: 46rem; margin-bottom: clamp(2.5rem, 6vw, 4.5rem); }
 .section-head h2 { font-size: clamp(2rem, 4.2vw, 3.25rem); line-height: 1.12; margin-bottom: 1.25rem; text-wrap: balance; }
 .section-head .lead { max-width: 38rem; }
+
+/* One emphasised phrase per paragraph — gives the eye something to catch
+   on a skim instead of every paragraph being a uniform grey block. */
+.hl { color: #e3c597; font-weight: 700; }
 
 .eyebrow {
   display: inline-block;
@@ -1520,17 +1541,31 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 }
 .field__optional { text-transform: none; letter-spacing: normal; font-weight: 400; }
 .field input, .field select, .field textarea {
-  background: #161310;
+  background: linear-gradient(160deg, #1a1611 0%, #161310 60%, #110e0b 100%);
   border: 1px solid rgba(246,243,238,0.12);
   border-radius: 0.6rem;
   padding: 0.85rem 1rem;
   color: #f6f3ee;
   font-family: 'Instrument Sans', sans-serif;
   font-size: 1rem;
-  transition: border-color 0.25s;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
 }
 .field input::placeholder, .field textarea::placeholder { color: #6b6359; }
-.field input:focus, .field select:focus, .field textarea:focus { border-color: #d3b27c; }
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: #d3b27c;
+  box-shadow: 0 0 0 3px rgba(211,178,124,0.18), 0 0 20px rgba(211,178,124,0.12);
+}
+.field__input-wrap { position: relative; display: flex; align-items: center; }
+.field__icon {
+  position: absolute;
+  left: 0.95rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  color: rgba(211,178,124,0.55);
+  pointer-events: none;
+}
+.field__input-wrap input { padding-left: 2.65rem; }
 .field select {
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b7afa5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
