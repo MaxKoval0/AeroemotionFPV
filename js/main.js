@@ -243,7 +243,15 @@
     document.fonts.ready.then(() => resize());
 
     let resizeQueued = false;
+    let lastWidth = window.innerWidth;
     window.addEventListener('resize', () => {
+      /* Mobile browsers fire resize when the address bar collapses/expands
+         on scroll — that only changes height, not width. Rebuilding the
+         canvas (and every particle's position) on that would make the
+         whole field flicker and reshuffle on every swipe. Only width
+         changes (real rotation/window resize) should trigger a rebuild. */
+      if (window.innerWidth === lastWidth) return;
+      lastWidth = window.innerWidth;
       if (resizeQueued) return;
       resizeQueued = true;
       requestAnimationFrame(() => { resize(); resizeQueued = false; });
@@ -341,6 +349,29 @@
       el.style.transitionDelay = `${Math.min(i % 4, 3) * 80}ms`;
       revealObserver.observe(el);
     });
+  }
+
+  /* Process section: one-shot light sweep down the grid, with the step
+     numbers lighting up in sequence shortly after the sweep passes them.
+     Purely additive — the CSS driving this is scoped to mobile widths, so
+     this has no visible effect on desktop regardless of when it fires. */
+  const processSection = document.querySelector('.process');
+  if (processSection && !reduceMotion) {
+    const processObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        processSection.classList.add('is-revealed');
+        processObserver.unobserve(entry.target);
+        const indexes = processSection.querySelectorAll('.process-step__index');
+        indexes.forEach((el, i) => {
+          setTimeout(() => {
+            el.classList.add('is-lit');
+            setTimeout(() => el.classList.remove('is-lit'), 800);
+          }, 350 + i * 220);
+        });
+      });
+    }, { threshold: 0.3 });
+    processObserver.observe(processSection);
   }
 
   /* Scroll-spy nav indicator */

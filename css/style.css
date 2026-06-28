@@ -78,6 +78,29 @@ p { margin: 0; }
 @media (min-width: 768px) { .wrap { padding-inline: 2.5rem; } }
 
 .section { padding-block: clamp(4rem, 10vw, 8rem); }
+@media (max-width: 900px) {
+  /* Every dark section sat on the exact same flat black with zero variation,
+     which is what reads as cheap/flat on a small screen where you can't see
+     several sections at once for the rhythm to register. A faint per-section
+     glow + vertical vignette gives each one some depth without competing
+     with the content. */
+  .section { position: relative; }
+  .section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 90% 55% at 15% 0%, rgba(211,178,124,0.06), transparent 60%),
+      linear-gradient(180deg, #0c0b0a 0%, #141110 45%, #0c0b0a 100%);
+  }
+  .section:nth-of-type(even)::before {
+    background:
+      radial-gradient(ellipse 80% 50% at 85% 100%, rgba(211,178,124,0.055), transparent 60%),
+      linear-gradient(180deg, #0c0b0a 0%, #110f0d 50%, #0c0b0a 100%);
+  }
+}
 
 .section-head { max-width: 46rem; margin-bottom: clamp(2.5rem, 6vw, 4.5rem); }
 .section-head h2 { font-size: clamp(2rem, 4.2vw, 3.25rem); line-height: 1.12; margin-bottom: 1.25rem; text-wrap: balance; }
@@ -340,7 +363,16 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 0%, transparent 22%, rgba(12,11,10,0.5) 42%, rgba(12,11,10,0.75) 60%, rgba(12,11,10,0.93) 85%, rgba(12,11,10,0.95) 100%);
+  /* Anchored to the actual heading position (set by JS) rather than a
+     guessed fixed percentage, so the empty video area above the text
+     always stays bright regardless of how many lines the heading wraps to. */
+  background: linear-gradient(180deg,
+    transparent 0%,
+    transparent calc(var(--hero-zone-top, 65%) - 14%),
+    rgba(12,11,10,0.55) var(--hero-zone-top, 65%),
+    rgba(12,11,10,0.88) var(--hero-zone-bottom, 90%),
+    rgba(12,11,10,0.93) 100%
+  );
 }
 .hero__vignette {
   position: absolute;
@@ -408,7 +440,9 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   font-size: 0.8rem;
 }
 @media (max-width: 640px) {
-  .hero__actions .btn { padding: 0.85rem 1.4rem; min-height: 44px; }
+  .hero__actions { gap: 0.6rem; flex-wrap: nowrap; }
+  .hero__actions .btn { flex: 1 1 0; min-width: 0; padding: 0.85rem 0.8rem; font-size: 0.74rem; min-height: 44px; }
+  .hero__actions .btn .icon { flex-shrink: 0; }
 }
 .hero__title em { font-style: italic; color: #d3b27c; }
 .hero__sub {
@@ -1075,6 +1109,26 @@ html.menu-open, html.menu-open body { overflow: hidden; }
     border-radius: 20px;
   }
   .device-phone__island { height: 8px; }
+  /* The reel UI chrome was sized for the desktop mockup (185px wide); at
+     105px the same absolute sizes ate most of the screen, leaving almost
+     no visible video. Scale it down with the phone instead. */
+  .reel-ui { padding: 0.5rem 0.35rem 0.45rem; }
+  .reel-ui__top { gap: 2px; }
+  .reel-ui__bar { height: 1px; }
+  .reel-ui__actions { right: 0.3rem; bottom: 2.1rem; gap: 0.45rem; }
+  .reel-action { gap: 0.08rem; }
+  .reel-action svg { width: 0.62rem; height: 0.62rem; }
+  .reel-action__count { font-size: 0.32rem; }
+  .reel-ui__caption { max-width: 58%; }
+  .reel-ui__username { font-size: 0.36rem; margin-bottom: 0.08rem; }
+  .reel-ui__text {
+    font-size: 0.32rem;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
 }
 
 /* Viewfinder corner brackets — appear on hover/focus, framing the shot */
@@ -1269,6 +1323,16 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   margin-bottom: 1.5rem;
 }
 .audience-card__icon svg { width: 1.4rem; height: 1.4rem; }
+@media (max-width: 900px) {
+  /* Card background sat at #161310 against a #0c0b0a page — barely
+     distinguishable, so the "card" read as a faint smudge rather than a
+     distinct object. A gradient + gold top edge gives it real presence. */
+  .audience-card {
+    background: linear-gradient(160deg, #1d1813 0%, #161310 55%, #110e0b 100%);
+    border-top: 2px solid rgba(211,178,124,0.4);
+  }
+  .audience-card__icon { box-shadow: 0 0 22px rgba(211,178,124,0.18); }
+}
 .audience-card__title { font-size: 1.25rem; margin-bottom: 0.75rem; }
 .audience-card__text { color: #b7afa5; font-size: 1rem; line-height: 1.6; }
 
@@ -1285,6 +1349,44 @@ html.menu-open, html.menu-open body { overflow: hidden; }
     repeating-linear-gradient(90deg, rgba(246,243,238,0.03) 0px, rgba(246,243,238,0.03) 1px, transparent 1px, transparent 48px);
   mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, black, transparent 78%);
   -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, black, transparent 78%);
+}
+@media (max-width: 900px) {
+  /* At 3% opacity, masked to a centred ellipse tuned for the wide desktop
+     grid, the pattern was effectively invisible on a narrow single-column
+     layout. Stronger lines, a fuller mask, plus a one-shot light sweep down
+     the grid (and a matching stagger on the step numbers) when the section
+     first comes into view. */
+  .process { overflow: hidden; }
+  .process::before {
+    background-image:
+      repeating-linear-gradient(0deg, rgba(246,243,238,0.06) 0px, rgba(246,243,238,0.06) 1px, transparent 1px, transparent 34px),
+      repeating-linear-gradient(90deg, rgba(246,243,238,0.06) 0px, rgba(246,243,238,0.06) 1px, transparent 1px, transparent 34px);
+    mask-image: radial-gradient(ellipse 100% 85% at 50% 35%, black, transparent 85%);
+    -webkit-mask-image: radial-gradient(ellipse 100% 85% at 50% 35%, black, transparent 85%);
+  }
+  .process::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -25%;
+    height: 35%;
+    background: linear-gradient(180deg, transparent, rgba(211,178,124,0.1), transparent);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+  }
+  .process.is-revealed::after { animation: process-wave 2.4s ease-in-out 1; }
+  @keyframes process-wave {
+    0% { top: -25%; opacity: 0; }
+    12% { opacity: 1; }
+    88% { opacity: 1; }
+    100% { top: 95%; opacity: 0; }
+  }
+  .process-step__index.is-lit {
+    color: rgba(221,188,134,0.95);
+    text-shadow: 0 0 18px rgba(211,178,124,0.5), 0 0 36px rgba(211,178,124,0.22);
+  }
 }
 .process .section-head { margin-bottom: 1.5rem; }
 .process__list {
