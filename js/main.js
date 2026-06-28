@@ -136,10 +136,12 @@
       const rect = heroEl.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
+      /* Visual size is left to CSS (position:absolute; inset:0) so the
+         canvas element always tracks the hero box with zero lag, even
+         between resize() calls. Only the drawing-buffer resolution (which
+         just affects sharpness, not position) is set here. */
       heroCanvas.width = width * dpr;
       heroCanvas.height = height * dpr;
-      heroCanvas.style.width = `${width}px`;
-      heroCanvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const contentEl = heroEl.querySelector('.hero__content');
       if (contentEl && height > 0) {
@@ -555,12 +557,28 @@
     /* A scroll-event listener isn't enough here: iOS Safari batches/throttles
        scroll event dispatch during momentum scrolling, so a handler driven by
        it only "catches up" once the finger lifts. Polling every animation
-       frame instead stays in sync with the actual compositor-driven scroll. */
-    function rafLoop() {
+       frame instead stays in sync with the actual compositor-driven scroll.
+       But running that poll unconditionally from page load — reading
+       getBoundingClientRect for every card on every frame, forever, even
+       while the user is still up in the Hero — competes with the browser's
+       own scroll handling and is exactly what made scrolling feel jerky.
+       Only run it while at least one watched element is actually near the
+       viewport. */
+    let rafId = null;
+    function loop() {
       updateScrollTilt();
-      requestAnimationFrame(rafLoop);
+      rafId = requestAnimationFrame(loop);
     }
-    requestAnimationFrame(rafLoop);
+    function startLoop() { if (!rafId) rafId = requestAnimationFrame(loop); }
+    function stopLoop() { if (rafId) { cancelAnimationFrame(rafId); rafId = null; } }
+
+    const watchEls = philosophySection ? [...tiltEls, philosophySection] : [...tiltEls];
+    let activeCount = 0;
+    const visibilityObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => { activeCount += entry.isIntersecting ? 1 : -1; });
+      if (activeCount > 0) startLoop(); else stopLoop();
+    }, { rootMargin: '200px 0px 200px 0px' });
+    watchEls.forEach((el) => visibilityObserver.observe(el));
   }
 
   /* Tier switcher: laptop media + phone reel + tier detail panels */

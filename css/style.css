@@ -81,24 +81,20 @@ p { margin: 0; }
 @media (max-width: 900px) {
   /* Every dark section sat on the exact same flat black with zero variation,
      which is what reads as cheap/flat on a small screen where you can't see
-     several sections at once for the rhythm to register. A faint per-section
-     glow + vertical vignette gives each one some depth without competing
-     with the content. */
-  .section { position: relative; }
-  .section::before {
+     several sections at once for the rhythm to register. A per-section glow
+     tied to each section's own box created a visible seam at every section
+     boundary (each one faded back to black at a slightly different point).
+     A single fixed, viewport-relative glow has no per-section edges to line
+     up, so it adds depth without ever creating a seam. */
+  body::before {
     content: '';
-    position: absolute;
+    position: fixed;
     inset: 0;
     z-index: -1;
     pointer-events: none;
     background:
-      radial-gradient(ellipse 90% 55% at 15% 0%, rgba(211,178,124,0.06), transparent 60%),
-      linear-gradient(180deg, #0c0b0a 0%, #141110 45%, #0c0b0a 100%);
-  }
-  .section:nth-of-type(even)::before {
-    background:
-      radial-gradient(ellipse 80% 50% at 85% 100%, rgba(211,178,124,0.055), transparent 60%),
-      linear-gradient(180deg, #0c0b0a 0%, #110f0d 50%, #0c0b0a 100%);
+      radial-gradient(ellipse 70% 45% at 18% 20%, rgba(211,178,124,0.05), transparent 60%),
+      radial-gradient(ellipse 65% 45% at 85% 75%, rgba(211,178,124,0.045), transparent 60%);
   }
 }
 
@@ -368,10 +364,10 @@ html.menu-open, html.menu-open body { overflow: hidden; }
      always stays bright regardless of how many lines the heading wraps to. */
   background: linear-gradient(180deg,
     transparent 0%,
-    transparent calc(var(--hero-zone-top, 65%) - 14%),
-    rgba(12,11,10,0.55) var(--hero-zone-top, 65%),
-    rgba(12,11,10,0.88) var(--hero-zone-bottom, 90%),
-    rgba(12,11,10,0.93) 100%
+    transparent calc(var(--hero-zone-top, 65%) - 8%),
+    rgba(12,11,10,0.8) var(--hero-zone-top, 65%),
+    rgba(12,11,10,0.9) var(--hero-zone-bottom, 90%),
+    rgba(12,11,10,0.95) 100%
   );
 }
 .hero__vignette {
@@ -382,6 +378,8 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 .hero__particles {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 2;
   pointer-events: none;
   mask-image: linear-gradient(
@@ -1111,18 +1109,22 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   .device-phone__island { height: 8px; }
   /* The reel UI chrome was sized for the desktop mockup (185px wide); at
      105px the same absolute sizes ate most of the screen, leaving almost
-     no visible video. Scale it down with the phone instead. */
-  .reel-ui { padding: 0.5rem 0.35rem 0.45rem; }
-  .reel-ui__top { gap: 2px; }
-  .reel-ui__bar { height: 1px; }
-  .reel-ui__actions { right: 0.3rem; bottom: 2.1rem; gap: 0.45rem; }
-  .reel-action { gap: 0.08rem; }
-  .reel-action svg { width: 0.62rem; height: 0.62rem; }
-  .reel-action__count { font-size: 0.32rem; }
-  .reel-ui__caption { max-width: 58%; }
-  .reel-ui__username { font-size: 0.36rem; margin-bottom: 0.08rem; }
-  .reel-ui__text {
-    font-size: 0.32rem;
+     no visible video. Scale it down with the phone instead.
+     These are qualified with the .device-phone ancestor (not just the bare
+     class) specifically to out-rank the base .reel-ui__* rules declared
+     later in the file — same specificity + earlier source order would
+     otherwise always lose the cascade regardless of this media query. */
+  .device-phone .reel-ui { padding: 0.25rem 0.18rem 0.22rem; }
+  .device-phone .reel-ui__top { gap: 1px; }
+  .device-phone .reel-ui__bar { height: 0.6px; }
+  .device-phone .reel-ui__actions { right: 0.15rem; bottom: 1.05rem; gap: 0.22rem; }
+  .device-phone .reel-action { gap: 0.04rem; }
+  .device-phone .reel-action svg { width: 0.3rem; height: 0.3rem; }
+  .device-phone .reel-action__count { font-size: 0.16rem; }
+  .device-phone .reel-ui__caption { max-width: 58%; }
+  .device-phone .reel-ui__username { font-size: 0.18rem; margin-bottom: 0.04rem; }
+  .device-phone .reel-ui__text {
+    font-size: 0.16rem;
     line-height: 1.3;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -1369,19 +1371,22 @@ html.menu-open, html.menu-open body { overflow: hidden; }
     position: absolute;
     left: 0;
     right: 0;
-    top: -25%;
-    height: 35%;
-    background: linear-gradient(180deg, transparent, rgba(211,178,124,0.1), transparent);
+    top: -50%;
+    height: 50%;
+    background: linear-gradient(180deg, transparent, rgba(211,178,124,0.16), transparent);
     pointer-events: none;
     z-index: -1;
     opacity: 0;
   }
-  .process.is-revealed::after { animation: process-wave 2.4s ease-in-out 1; }
+  /* A calm, continuous loop rather than a one-shot flourish — this is
+     ambient atmosphere for the section, not a reveal animation, so it
+     keeps running for as long as the section is on screen. */
+  .process.is-revealed::after { animation: process-wave 7s ease-in-out infinite; }
   @keyframes process-wave {
-    0% { top: -25%; opacity: 0; }
-    12% { opacity: 1; }
-    88% { opacity: 1; }
-    100% { top: 95%; opacity: 0; }
+    0% { top: -50%; opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
   }
   .process-step__index.is-lit {
     color: rgba(221,188,134,0.95);
