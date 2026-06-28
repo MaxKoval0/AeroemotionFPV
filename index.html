@@ -1,0 +1,493 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c0b0a">
+<title>AEROEMOTION — Cinematic Lifestyle Films for Luxury Real Estate in Spain</title>
+<meta name="description" content="AEROEMOTION creates Interactive Lifestyle Assets — cinematic storytelling, FPV drone flow and 3D motion design — for ultra-luxury villas, yachts and boutique hotels across Valencia, Costa Blanca, Altea, Jávea and Dénia.">
+<meta property="og:title" content="AEROEMOTION — Cinematic Lifestyle Films for Luxury Real Estate in Spain">
+<meta property="og:description" content="Interactive Lifestyle Assets for ultra-luxury villas, yachts and boutique hotels. Cinematic storytelling, FPV drone flow and 3D motion design.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/images/og-image.jpg">
+<meta property="og:url" content="https://www.aeroemotion.es/">
+<meta name="robots" content="index, follow">
+<meta name="author" content="AEROEMOTION">
+<link rel="canonical" href="https://www.aeroemotion.es/">
+<link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="navbar__inner">
+    <a href="#top" class="navbar__logo" aria-label="Aeroemotion — home">
+      <span class="navbar__logo-aero">AERO</span><span class="navbar__logo-accent">EMOTION</span>
+    </a>
+    <nav class="navbar__links" aria-label="Primary">
+      <a href="#philosophy" class="navbar__link">The Shift</a>
+      <a href="#services" class="navbar__link">Services</a>
+      <a href="#process" class="navbar__link">Process</a>
+      <a href="#locations" class="navbar__link">Locations</a>
+      <a href="#contact" class="btn btn--primary btn--sm navbar__cta">Start a Project</a>
+    </nav>
+    <button class="navbar__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <svg class="icon icon--open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/></svg>
+      <svg class="icon icon--close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18 18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mobile-menu__nav" aria-label="Mobile">
+    <a href="#philosophy" class="mobile-menu__link">The Shift</a>
+    <a href="#audience" class="mobile-menu__link">Who It's For</a>
+    <a href="#services" class="mobile-menu__link">Services</a>
+    <a href="#process" class="mobile-menu__link">Process</a>
+    <a href="#locations" class="mobile-menu__link">Locations</a>
+  </nav>
+  <a href="#contact" class="btn btn--primary mobile-menu__cta">Start a Project</a>
+</div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero__media">
+      <div class="placeholder-gradient placeholder-gradient--hero" data-tier-media="hero">
+        <div class="hero__art" aria-hidden="true">
+          <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="droneGlow" x="-200%" y="-200%" width="500%" height="500%">
+                <feGaussianBlur stdDeviation="5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="sunBlur" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="35"/>
+              </filter>
+              <linearGradient id="seaGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1f2e2c" stop-opacity="0.85"/>
+                <stop offset="1" stop-color="#0c0b0a" stop-opacity="0.95"/>
+              </linearGradient>
+            </defs>
+
+            <circle class="hero-art__sun" cx="1220" cy="210" r="120" filter="url(#sunBlur)"/>
+
+            <path class="hero-art__ridge hero-art__ridge--back" d="M-10,580 C200,520 380,560 580,525 C800,488 1000,545 1220,510 C1400,482 1520,520 1610,500 L1610,910 L-10,910 Z"/>
+
+            <rect x="-10" y="640" width="1620" height="270" fill="url(#seaGradient)"/>
+            <path class="hero-art__glint" d="M-10,664 C260,650 420,672 700,659 C980,646 1180,668 1610,652 L1610,672 C1180,690 980,668 700,681 C420,694 260,672 -10,686 Z"/>
+
+            <path class="hero-art__ridge hero-art__ridge--front" d="M-10,680 C180,630 360,670 560,640 C680,622 760,612 900,608 C1080,603 1260,615 1400,605 C1480,600 1560,612 1610,605 L1610,910 L-10,910 Z"/>
+
+            <path class="hero-art__flightpath" d="M-40,300 C260,180 480,360 760,260 C1040,160 1300,320 1650,240"/>
+            <circle class="hero-art__drone" cx="760" cy="260" r="5" filter="url(#droneGlow)"/>
+          </svg>
+        </div>
+        <video class="screen-media__video" muted loop playsinline preload="none" data-src="assets/video/hero-bg.mp4" aria-hidden="true"></video>
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__vignette" aria-hidden="true"></div>
+    </div>
+    <canvas class="hero__particles" aria-hidden="true"></canvas>
+    <div class="hero__content wrap">
+      <h1 class="hero__title reveal">We Don't Film Empty Rooms.<br>We Film <em>the Life Inside Them.</em></h1>
+      <p class="hero__sub reveal">Cinematic lifestyle films for luxury real estate across Spain's Costa Blanca and beyond.</p>
+      <div class="hero__actions reveal">
+        <a href="#contact" class="btn btn--primary">Get a Free Concept</a>
+        <a href="#services" class="btn btn--ghost">
+          Explore Services
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SHIFT -->
+  <section class="section philosophy" id="philosophy">
+    <div class="philosophy__glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow reveal">The Shift</p>
+        <h2 class="reveal">Empty Walls Don't Sell Villas.<br>Emotion Does.</h2>
+      </div>
+      <div class="shift__hooks reveal">
+        <p class="shift__hook">We Sell the Want to Own It. Almost Nobody Else Does.</p>
+        <p class="shift__hook">We Film What Buyers Haven't Seen 50 Times Today.</p>
+      </div>
+      <div class="shift__grid">
+        <div class="shift-card shift-card--old reveal">
+          <p class="shift-card__label">The Old Way</p>
+          <h3 class="shift-card__title">Generic Portal Content</h3>
+          <p class="shift-card__body">Standard wide-angle photos of cold, empty rooms. Clinical. Forgettable. Your premium listing disappears in the endless scroll — never evoking the emotion that moves a serious buyer to act.</p>
+          <ul class="shift-card__list">
+            <li>Static photos of empty rooms</li>
+            <li>No lifestyle, no emotion</li>
+            <li>Lost in the listing scroll</li>
+            <li>The buyer never feels the home</li>
+          </ul>
+        </div>
+        <div class="shift-card shift-card--new reveal">
+          <p class="shift-card__label">The AEROEMOTION Way</p>
+          <h3 class="shift-card__title">Emotion-Led Cinema</h3>
+          <p class="shift-card__body">We script the experience. Our cinewhoop drifts from a sun-drenched pool into morning coffee on the terrace — your buyer feels the warmth of the home before they ever set foot in Spain.</p>
+          <ul class="shift-card__list">
+            <li>Cinematic FPV storytelling with actors</li>
+            <li>3D motion graphics woven into footage</li>
+            <li>Custom sound design &amp; licensed score</li>
+            <li>Ready for WhatsApp, social &amp; portals</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIENCE -->
+  <section class="section audience" id="audience">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow reveal">Who It's For</p>
+        <h2 class="reveal">For the Professionals Who Sell Spain's Finest Properties.</h2>
+      </div>
+      <div class="audience__grid">
+        <div class="audience-card reveal">
+          <div class="audience-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z"/></svg>
+          </div>
+          <h3 class="audience-card__title">Luxury Agencies</h3>
+          <p class="audience-card__text">A discreet, high-impact asset for agents handling €1M+ listings — engineered to convert international buyers on WhatsApp and Telegram before the first private viewing.</p>
+        </div>
+        <div class="audience-card reveal">
+          <div class="audience-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V6.75c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21M14.25 21V9.75c0-.621.504-1.125 1.125-1.125h3.5c.621 0 1.125.504 1.125 1.125V21M8.25 9h1.5m-1.5 3h1.5m-1.5 3h1.5m6-3h1.5m-1.5 3h1.5"/></svg>
+          </div>
+          <h3 class="audience-card__title">Premium Developers</h3>
+          <p class="audience-card__text">Sell the lifestyle before the last brick is laid. Off-plan campaigns, investor presentations and pre-construction launches — give buyers something to feel, not just floorplans to study.</p>
+        </div>
+        <div class="audience-card reveal">
+          <div class="audience-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>
+          </div>
+          <h3 class="audience-card__title">Premium Vacation Hosts</h3>
+          <p class="audience-card__text">For villas commanding €5,000 a week or more — show the scale, the light and the absolute privacy that turns a browser into a booking.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES / INTERACTIVE DEMO -->
+  <section class="section services" id="services">
+    <div class="wrap">
+      <div class="services__layout">
+        <div class="services__intro">
+          <div class="section-head">
+            <p class="eyebrow reveal">One Production Day · Three Ways to Sell</p>
+            <h2 class="reveal">Choose How the Story Travels.</h2>
+          </div>
+
+          <div class="founding-badge reveal">
+            <span class="founding-badge__tag">Founding-season rate</span>
+            <span class="founding-badge__text">These prices rise once the portfolio's built.</span>
+          </div>
+
+          <div class="tier-switcher reveal" role="tablist" aria-label="Service tiers">
+            <button class="tier-tab is-active" role="tab" aria-selected="true" id="tierTab1" aria-controls="tierPanel1" data-tier="1">
+              <span class="tier-tab__index">01</span>
+              <span class="tier-tab__label">Cinematic Edition</span>
+              <span class="tier-tab__price"><s class="tier-tab__price-old">€1900</s>€1,500</span>
+            </button>
+            <button class="tier-tab" role="tab" aria-selected="false" id="tierTab2" aria-controls="tierPanel2" data-tier="2">
+              <span class="tier-tab__index">02</span>
+              <span class="tier-tab__label">3D Edition</span>
+              <span class="tier-tab__price"><s class="tier-tab__price-old">€2750</s>€2,200</span>
+            </button>
+            <button class="tier-tab" role="tab" aria-selected="false" id="tierTab3" aria-controls="tierPanel3" data-tier="3">
+              <span class="tier-tab__index">03</span>
+              <span class="tier-tab__label">3D + Social Edition</span>
+              <span class="tier-tab__price"><s class="tier-tab__price-old">€3600</s>€2,900</span>
+            </button>
+          </div>
+        </div><!-- /.services__intro -->
+
+        <div class="services__details">
+          <div class="tier-panels reveal">
+            <div class="tier-panel is-active" id="tierPanel1" role="tabpanel" aria-labelledby="tierTab1" data-tier-panel="1">
+              <p class="tier-panel__desc">A 60&ndash;90 second horizontal film that flies through the property like a guest discovering it for the first time &mdash; FPV and ground cinematography, professional talent and a licensed score.</p>
+              <ul class="tier-panel__list">
+                <li>FPV drone flythrough, exterior &amp; interior</li>
+                <li>Ground cinematography with gimbal</li>
+                <li>Professional talent on set</li>
+                <li>Licensed sound design &amp; score</li>
+                <li>Colour grading &amp; final mix</li>
+                <li>Delivered in 4K, horizontal (16:9)</li>
+              </ul>
+            </div>
+            <div class="tier-panel" id="tierPanel2" role="tabpanel" aria-labelledby="tierTab2" data-tier-panel="2" hidden>
+              <p class="tier-panel__desc">Everything in Cinematic Edition, with 3D motion graphics and animated typography integrated directly into the footage &mdash; so the story sells itself, even on mute.</p>
+              <ul class="tier-panel__list">
+                <li>Everything in Cinematic Edition</li>
+                <li>Integrated 3D motion graphics</li>
+                <li>Animated price, spec &amp; location overlays</li>
+                <li>Branded title sequence</li>
+                <li>2 rounds of revisions</li>
+                <li>Delivered in 4K, horizontal (16:9)</li>
+              </ul>
+            </div>
+            <div class="tier-panel" id="tierPanel3" role="tabpanel" aria-labelledby="tierTab3" data-tier-panel="3" hidden>
+              <p class="tier-panel__desc">Everything in 3D Edition, plus 3&ndash;5 vertical cuts built for Reels, TikTok and Stories &mdash; ready to post, trend-aware, with captions and platform-native pacing.</p>
+              <ul class="tier-panel__list">
+                <li>Everything in 3D Edition</li>
+                <li>3&ndash;5 vertical edits (9:16)</li>
+                <li>Platform-native pacing, text &amp; captions</li>
+                <li>Trend-aware sound selection</li>
+                <li>Ready-to-post export presets</li>
+                <li>Priority turnaround</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="services__cta reveal">
+            <a href="#contact" class="btn btn--primary">Get a Free Concept</a>
+            <p class="services__price-context">Less than 5% of a single commission — spent on the asset that decides if a viewing gets booked at all.</p>
+          </div>
+
+        </div><!-- /.services__details -->
+
+        <div class="demo-stage reveal" data-tier-stage="1">
+          <div class="device device-laptop">
+            <div class="device-laptop__screen">
+              <div class="device-laptop__cam"></div>
+              <div class="screen-media">
+                <div class="screen-media__layer placeholder-gradient placeholder-gradient--1 is-active" data-tier-media="1">
+                  <div class="screen-media__placeholder">
+                    <span class="play-badge">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </span>
+                    <span class="screen-media__tag">Showreel &mdash; Tier 01</span>
+                    <span class="screen-media__title">Cinematic Edition</span>
+                  </div>
+                  <video class="screen-media__video" muted loop playsinline preload="none" data-src="assets/video/tier1.mp4"></video>
+                </div>
+                <div class="screen-media__layer placeholder-gradient placeholder-gradient--2" data-tier-media="2">
+                  <div class="screen-media__placeholder">
+                    <span class="play-badge">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </span>
+                    <span class="screen-media__tag">Showreel &mdash; Tier 02</span>
+                    <span class="screen-media__title">3D Edition</span>
+                  </div>
+                  <video class="screen-media__video" muted loop playsinline preload="none" data-src="assets/video/tier2.mp4"></video>
+                </div>
+              </div>
+              <div class="scan-sweep" aria-hidden="true"></div>
+              <div class="frame-corners" aria-hidden="true">
+                <span class="frame-corner frame-corner--tl"></span>
+                <span class="frame-corner frame-corner--tr"></span>
+                <span class="frame-corner frame-corner--bl"></span>
+                <span class="frame-corner frame-corner--br"></span>
+              </div>
+            </div>
+            <div class="device-laptop__base"></div>
+          </div>
+
+          <div class="device device-phone" data-phone>
+            <div class="device-phone__island"></div>
+            <div class="device-phone__screen">
+              <div class="screen-media__layer placeholder-gradient placeholder-gradient--3 is-active" data-tier-media="3">
+                <div class="screen-media__placeholder">
+                  <span class="play-badge play-badge--sm">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  </span>
+                  <span class="screen-media__tag">Reel &mdash; Tier 03</span>
+                </div>
+                <video class="screen-media__video" muted loop playsinline preload="none" data-src="assets/video/tier3-reel.mp4"></video>
+              </div>
+              <div class="reel-ui">
+                  <div class="reel-ui__actions">
+                  <button class="reel-action" type="button" aria-label="Like" data-like>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35Z"/></svg>
+                    <span class="reel-action__count" data-like-count>842K</span>
+                  </button>
+                  <button class="reel-action" type="button" aria-label="Comment">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.25 12.76c0 1.6 1.12 3 2.71 3.23 1.45.21 2.92.36 4.4.43L12 21l2.64-4.58c1.48-.07 2.95-.22 4.4-.43 1.59-.23 2.71-1.62 2.71-3.23V6.74c0-1.6-1.12-3-2.71-3.23a48.4 48.4 0 0 0-13.68 0c-1.59.23-2.71 1.62-2.71 3.23v6.02Z"/></svg>
+                    <span class="reel-action__count">3,104</span>
+                  </button>
+                  <button class="reel-action" type="button" aria-label="Share">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12 3.27 3.96a.75.75 0 0 1 .988-.945l16.5 7.5a.75.75 0 0 1 0 1.36l-16.5 7.5a.75.75 0 0 1-.988-.945L6 12Zm0 0h7.5"/></svg>
+                  </button>
+                  <button class="reel-action" type="button" aria-label="Save">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.59 3.32c1.1.13 1.91 1.08 1.91 2.19V21L12 17.25 4.5 21V5.51c0-1.11.81-2.06 1.91-2.19a48.5 48.5 0 0 1 11.18 0Z"/></svg>
+                  </button>
+                </div>
+                <div class="reel-ui__caption">
+                  <p class="reel-ui__username">@aeroemotion.es</p>
+                  <p class="reel-ui__text">Villa Aurora &middot; J&aacute;vea &mdash; the view that sold it. &#127916;</p>
+                </div>
+              </div>
+              <div class="frame-corners" aria-hidden="true">
+                <span class="frame-corner frame-corner--tl"></span>
+                <span class="frame-corner frame-corner--tr"></span>
+                <span class="frame-corner frame-corner--bl"></span>
+                <span class="frame-corner frame-corner--br"></span>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.demo-stage -->
+
+      </div><!-- /.services__layout -->
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section process" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow reveal">How We Work</p>
+        <h2 class="reveal">From Concept to Screen in Days.</h2>
+      </div>
+      <ol class="process__list">
+        <li class="process-step reveal">
+          <span class="process-step__index">01</span>
+          <div>
+            <h3 class="process-step__title">Scripting &amp; Casting</h3>
+            <p class="process-step__text">We study the property and the target buyer, write a custom lifestyle script and cast professional models to bring the space to life.</p>
+          </div>
+        </li>
+        <li class="process-step reveal">
+          <span class="process-step__index">02</span>
+          <div>
+            <h3 class="process-step__title">The Shoot Day</h3>
+            <p class="process-step__text">Ultra-smooth indoor-outdoor cinewhoop flights, timed to golden hour. Fully AESA certified &mdash; all flight permits secured before we arrive on set.</p>
+          </div>
+        </li>
+        <li class="process-step reveal">
+          <span class="process-step__index">03</span>
+          <div>
+            <h3 class="process-step__title">VFX &amp; Motion Design</h3>
+            <p class="process-step__text">Our motion team embeds 3D-tracked typography, premium brand callouts and layout details directly into the physical space of the footage.</p>
+          </div>
+        </li>
+        <li class="process-step reveal">
+          <span class="process-step__index">04</span>
+          <div>
+            <h3 class="process-step__title">Colour, Sound &amp; Delivery</h3>
+            <p class="process-step__text">Cinema colour grade, immersive sound design and a licensed score. Optimised 4K masters delivered within 5&ndash;8 business days.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section class="section locations" id="locations">
+    <div class="locations__glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow reveal">Where We Shoot</p>
+        <h2 class="reveal">Based on the Costa Blanca.<br>At Home on Spain's Finest Coastlines.</h2>
+        <p class="lead reveal">From cliffside villas in Jávea to waterfront new-builds in Valencia, we plan every shoot around golden hour and the property's own rhythm — arriving prepared, capturing precisely.</p>
+      </div>
+    </div>
+    <div class="locations__marquee reveal" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__item">Valencia</span>
+        <span class="marquee__item">Costa Blanca</span>
+        <span class="marquee__item">Altea</span>
+        <span class="marquee__item">Jávea</span>
+        <span class="marquee__item">Dénia</span>
+        <span class="marquee__item">Valencia</span>
+        <span class="marquee__item">Costa Blanca</span>
+        <span class="marquee__item">Altea</span>
+        <span class="marquee__item">Jávea</span>
+        <span class="marquee__item">Dénia</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="wrap contact__grid">
+      <div class="contact__intro">
+        <p class="eyebrow reveal">Start a Project</p>
+        <h2 class="reveal">Get Your Free Visual Concept.</h2>
+        <p class="lead reveal">Drop a link to your listing and we'll send you a tailored visual concept and production plan via WhatsApp — no commitment, no cost.</p>
+        <p class="contact__founder-note reveal">Every project is personally directed from brief to screen. We keep our slate deliberately small — so nothing gets delegated and nothing gets missed.</p>
+        <a href="#" data-whatsapp-link data-whatsapp-text="Hi aeroemotion, I'd like to ask about a lifestyle film for my property." class="whatsapp-direct reveal" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.86-7.01ZM12.04 20.15h-.01c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.01 4.55-3.69 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.24-.64.81-.78.97-.15.17-.29.18-.54.06-1.47-.74-2.43-1.32-3.4-2.99-.26-.44.26-.41.74-1.36.08-.17.04-.31-.03-.44-.08-.12-.55-1.33-.76-1.82-.2-.48-.41-.42-.56-.42-.14-.01-.31-.01-.47-.01-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.13.17 1.71 2.6 4.14 3.55 2.06.79 2.48.64 2.93.6.45-.04 1.47-.6 1.68-1.18.21-.59.21-1.08.15-1.18-.06-.11-.23-.17-.48-.3Z"/></svg>
+          <span>Prefer WhatsApp? Message us directly</span>
+        </a>
+      </div>
+      <form class="form reveal" id="leadForm" novalidate>
+        <div class="form__row">
+          <div class="field">
+            <label for="fullName">Your name</label>
+            <input type="text" id="fullName" name="fullName" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="whatsapp">WhatsApp number</label>
+            <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" placeholder="+34 600 000 000" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="propertyLink">Property link <span class="field__optional">(Airbnb, Idealista, agency site or address)</span></label>
+          <input type="url" id="propertyLink" name="propertyLink" placeholder="https://www.airbnb.com/rooms/...">
+        </div>
+        <div class="field">
+          <label for="message">Anything else <span class="field__optional">(optional)</span></label>
+          <textarea id="message" name="message" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary form__submit">Send My Property</button>
+        <p class="form__success" role="status" aria-live="polite">Thank you — we'll be in touch on WhatsApp within 24 hours.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div class="footer__brand">
+      <a href="#top" class="navbar__logo" aria-label="Aeroemotion — home">
+        <span class="navbar__logo-aero">AERO</span><span class="navbar__logo-accent">EMOTION</span>
+      </a>
+      <p>Cinematic lifestyle films for Spain's finest addresses.</p>
+      <div class="footer__social">
+        <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" data-whatsapp-link aria-label="WhatsApp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.86-7.01ZM12.04 20.15h-.01c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.01 4.55-3.69 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.24-.64.81-.78.97-.15.17-.29.18-.54.06-1.47-.74-2.43-1.32-3.4-2.99-.26-.44.26-.41.74-1.36.08-.17.04-.31-.03-.44-.08-.12-.55-1.33-.76-1.82-.2-.48-.41-.42-.56-.42-.14-.01-.31-.01-.47-.01-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.13.17 1.71 2.6 4.14 3.55 2.06.79 2.48.64 2.93.6.45-.04 1.47-.6 1.68-1.18.21-.59.21-1.08.15-1.18-.06-.11-.23-.17-.48-.3Z"/></svg>
+        </a>
+        <a href="mailto:hello@aeroemotion.es" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.24a2.25 2.25 0 0 1-1.07 1.92l-7.5 4.61a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.92V6.75"/></svg>
+        </a>
+      </div>
+    </div>
+    <nav class="footer__nav" aria-label="Footer">
+      <h4>Navigate</h4>
+      <a href="#philosophy">The Shift</a>
+      <a href="#audience">Who It's For</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+  <div class="wrap footer__bottom">
+    <p>© 2026 AEROEMOTION. All rights reserved.</p>
+    <div class="footer__legal-links">
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="mailto:hello@aeroemotion.es">hello@aeroemotion.es</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
