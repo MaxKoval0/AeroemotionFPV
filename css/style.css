@@ -1,6 +1,10 @@
 /* ============ Reset & base ============ */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; cursor: default; }
+/* One brand-matched focus ring for every interactive element site-wide.
+   :focus-visible (not :focus) so it only appears for keyboard navigation,
+   not on every tap/click — otherwise this fires constantly on touch. */
+:focus-visible { outline: 2px solid #d3b27c; outline-offset: 2px; }
 input, textarea, select { cursor: text; }
 select { cursor: default; }
 body {
@@ -905,6 +909,12 @@ html.menu-open, html.menu-open body { overflow: hidden; }
     background: linear-gradient(100deg, transparent, rgba(255,255,255,0.18), transparent);
     pointer-events: none;
     animation: gold-sheen 7s ease-in-out infinite;
+  }
+  /* Offset so the two sheens (badge + active tab) don't pulse in perfect
+     lockstep — two unrelated elements visibly synced to the same beat
+     reads as a templated trick rather than something considered. */
+  .tier-tab.is-active::after {
+    animation-delay: 3.2s;
   }
   @keyframes gold-sheen {
     0% { left: -60%; }
