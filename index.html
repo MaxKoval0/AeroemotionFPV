@@ -268,7 +268,11 @@
             <div class="device-laptop__screen">
               <div class="device-laptop__cam"></div>
               <div class="screen-media">
-                <div class="screen-media__layer placeholder-gradient placeholder-gradient--1 is-active" data-tier-media="1">
+                <!-- data-embed-url: paste a YouTube/Vimeo embed link (e.g.
+                     https://www.youtube-nocookie.com/embed/XXXXXXXXXXX?autoplay=1&rel=0)
+                     to enable the "Watch the full film" button for this tier.
+                     Leave empty to keep the button hidden for that tier. -->
+                <div class="screen-media__layer placeholder-gradient placeholder-gradient--1 is-active" data-tier-media="1" data-embed-url="">
                   <div class="screen-media__placeholder">
                     <span class="play-badge">
                       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -278,7 +282,7 @@
                   </div>
                   <video class="screen-media__video" muted loop playsinline preload="none" data-src="assets/video/tier1.mp4"></video>
                 </div>
-                <div class="screen-media__layer placeholder-gradient placeholder-gradient--2" data-tier-media="2">
+                <div class="screen-media__layer placeholder-gradient placeholder-gradient--2" data-tier-media="2" data-embed-url="">
                   <div class="screen-media__placeholder">
                     <span class="play-badge">
                       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -290,9 +294,9 @@
                 </div>
               </div>
               <div class="scan-sweep" aria-hidden="true"></div>
-              <button class="watch-full" type="button" data-watch-device="laptop" aria-label="Watch this film full-size, with sound">
+              <button class="watch-full" type="button" id="watchFullFilm" aria-label="Watch the full film in 4K, with sound" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
-                <span>Watch with sound</span>
+                <span>Watch the full film</span>
               </button>
               <div class="frame-corners" aria-hidden="true">
                 <span class="frame-corner frame-corner--tl"></span>
@@ -338,9 +342,6 @@
                   <p class="reel-ui__text">Villa Aurora &middot; J&aacute;vea &mdash; the view that sold it. &#127916;</p>
                 </div>
               </div>
-              <button class="watch-full watch-full--sm" type="button" data-watch-device="phone" aria-label="Watch this reel full-size, with sound">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
-              </button>
               <div class="frame-corners" aria-hidden="true">
                 <span class="frame-corner frame-corner--tl"></span>
                 <span class="frame-corner frame-corner--tr"></span>
@@ -510,7 +511,9 @@
   <button class="video-lightbox__close" type="button" aria-label="Close video" data-lightbox-close>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18 18 6M6 6l12 12"/></svg>
   </button>
-  <video class="video-lightbox__video" id="lightboxVideo" controls loop playsinline></video>
+  <div class="video-lightbox__frame">
+    <iframe class="video-lightbox__iframe" id="lightboxFrame" src="" title="Full film playback" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+  </div>
 </div>
 
 <script src="js/main.js"></script>

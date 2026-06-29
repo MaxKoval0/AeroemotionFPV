@@ -691,6 +691,7 @@
       if (active) { loadVideo(video); playVideo(video); }
       else video.pause();
     });
+    updateWatchFullVisibility();
 
     const phoneVideo = document.querySelector('.device-phone__screen video[data-src]');
     if (phoneVideo) {
@@ -714,57 +715,52 @@
     scanSweep.classList.add('is-sweeping');
   }
 
-  /* Video lightbox — full-quality, unmuted playback of the same footage
-     shown muted/cropped inside the device mockups */
+  /* Video lightbox — the full 60-90s film (YouTube/Vimeo embed), full
+     quality with sound. Separate asset from the muted/cropped loop shown
+     inside the device mockup; only appears once a tier's layer has a
+     data-embed-url set (see comment in index.html). */
   const videoLightbox = document.getElementById('videoLightbox');
-  const lightboxVideo = document.getElementById('lightboxVideo');
+  const lightboxFrame = document.getElementById('lightboxFrame');
+  const watchFullBtn = document.getElementById('watchFullFilm');
   let lightboxLastFocus = null;
 
-  function getActiveVideoSrc(device) {
-    if (device === 'laptop') {
-      const activeLayer = document.querySelector('.device-laptop [data-tier-media].is-active');
-      const video = activeLayer?.querySelector('video');
-      return video?.dataset.src || null;
-    }
-    const video = document.querySelector('.device-phone__screen video[data-src]');
-    return video?.dataset.src || null;
+  function getActiveEmbedUrl() {
+    const activeLayer = document.querySelector('.device-laptop [data-tier-media].is-active');
+    return activeLayer?.dataset.embedUrl || '';
   }
 
-  function openLightbox(device) {
-    if (!videoLightbox || !lightboxVideo) return;
-    const src = getActiveVideoSrc(device);
-    if (!src) return;
+  function updateWatchFullVisibility() {
+    if (!watchFullBtn) return;
+    watchFullBtn.hidden = !getActiveEmbedUrl();
+  }
+
+  function openLightbox() {
+    if (!videoLightbox || !lightboxFrame) return;
+    const embedUrl = getActiveEmbedUrl();
+    if (!embedUrl) return;
     lightboxLastFocus = document.activeElement;
-    lightboxVideo.src = src;
-    // Start muted so autoplay is never blocked, then unmute once playback
-    // actually begins — works regardless of how "trusted" the triggering
-    // click was, and avoids a silent paused-with-sound-off first frame.
-    lightboxVideo.muted = true;
+    lightboxFrame.src = embedUrl;
     videoLightbox.hidden = false;
     document.documentElement.classList.add('lightbox-open');
-    lightboxVideo.play().then(() => { lightboxVideo.muted = false; }).catch(() => {});
     videoLightbox.querySelector('.video-lightbox__close')?.focus();
   }
 
   function closeLightbox() {
-    if (!videoLightbox || !lightboxVideo) return;
+    if (!videoLightbox || !lightboxFrame) return;
     videoLightbox.hidden = true;
     document.documentElement.classList.remove('lightbox-open');
-    lightboxVideo.pause();
-    lightboxVideo.removeAttribute('src');
-    lightboxVideo.load();
+    lightboxFrame.src = 'about:blank';
     if (lightboxLastFocus?.focus) lightboxLastFocus.focus();
   }
 
-  document.querySelectorAll('[data-watch-device]').forEach((btn) => {
-    btn.addEventListener('click', () => openLightbox(btn.dataset.watchDevice));
-  });
+  watchFullBtn?.addEventListener('click', openLightbox);
   videoLightbox?.querySelectorAll('[data-lightbox-close]').forEach((el) => {
     el.addEventListener('click', closeLightbox);
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && videoLightbox && !videoLightbox.hidden) closeLightbox();
   });
+  updateWatchFullVisibility();
 
   /* Price count-up for the 3D Edition overlay */
   const priceCountEl = document.querySelector('[data-price-count]');
