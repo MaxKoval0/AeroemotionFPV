@@ -441,7 +441,16 @@
   function loadVideo(video) {
     if (video.dataset.loaded) return;
     video.dataset.loaded = 'true';
-    video.src = video.dataset.src;
+    /* Videos with <source media="..."> children (currently just the hero)
+       let the browser itself pick the right file for the viewport — each
+       source's real src is filled in from data-src right before load() so
+       nothing fetches until it's actually needed. */
+    const sources = video.querySelectorAll('source[data-src]');
+    if (sources.length) {
+      sources.forEach((source) => { source.src = source.dataset.src; });
+    } else {
+      video.src = video.dataset.src;
+    }
     video.addEventListener('loadeddata', () => video.classList.add('is-loaded'));
     video.addEventListener('error', () => video.remove());
     video.load();
@@ -455,7 +464,7 @@
       video.addEventListener('click', () => video.play().catch(() => {}), { once: true });
     });
   }
-  const videos = document.querySelectorAll('.screen-media__video[data-src]');
+  const videos = document.querySelectorAll('.screen-media__video[data-src], .screen-media__video:has(source[data-src])');
   const videoObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       const video = entry.target;
@@ -704,6 +713,58 @@
     void scanSweep.offsetWidth;
     scanSweep.classList.add('is-sweeping');
   }
+
+  /* Video lightbox — full-quality, unmuted playback of the same footage
+     shown muted/cropped inside the device mockups */
+  const videoLightbox = document.getElementById('videoLightbox');
+  const lightboxVideo = document.getElementById('lightboxVideo');
+  let lightboxLastFocus = null;
+
+  function getActiveVideoSrc(device) {
+    if (device === 'laptop') {
+      const activeLayer = document.querySelector('.device-laptop [data-tier-media].is-active');
+      const video = activeLayer?.querySelector('video');
+      return video?.dataset.src || null;
+    }
+    const video = document.querySelector('.device-phone__screen video[data-src]');
+    return video?.dataset.src || null;
+  }
+
+  function openLightbox(device) {
+    if (!videoLightbox || !lightboxVideo) return;
+    const src = getActiveVideoSrc(device);
+    if (!src) return;
+    lightboxLastFocus = document.activeElement;
+    lightboxVideo.src = src;
+    // Start muted so autoplay is never blocked, then unmute once playback
+    // actually begins — works regardless of how "trusted" the triggering
+    // click was, and avoids a silent paused-with-sound-off first frame.
+    lightboxVideo.muted = true;
+    videoLightbox.hidden = false;
+    document.documentElement.classList.add('lightbox-open');
+    lightboxVideo.play().then(() => { lightboxVideo.muted = false; }).catch(() => {});
+    videoLightbox.querySelector('.video-lightbox__close')?.focus();
+  }
+
+  function closeLightbox() {
+    if (!videoLightbox || !lightboxVideo) return;
+    videoLightbox.hidden = true;
+    document.documentElement.classList.remove('lightbox-open');
+    lightboxVideo.pause();
+    lightboxVideo.removeAttribute('src');
+    lightboxVideo.load();
+    if (lightboxLastFocus?.focus) lightboxLastFocus.focus();
+  }
+
+  document.querySelectorAll('[data-watch-device]').forEach((btn) => {
+    btn.addEventListener('click', () => openLightbox(btn.dataset.watchDevice));
+  });
+  videoLightbox?.querySelectorAll('[data-lightbox-close]').forEach((el) => {
+    el.addEventListener('click', closeLightbox);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && videoLightbox && !videoLightbox.hidden) closeLightbox();
+  });
 
   /* Price count-up for the 3D Edition overlay */
   const priceCountEl = document.querySelector('[data-price-count]');
