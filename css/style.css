@@ -308,41 +308,24 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   .mobile-menu { display: none; }
 }
 
-/* ============ Placeholder gradients (Ken Burns) ============ */
+/* ============ Placeholder backgrounds ============ */
 .placeholder-gradient {
   position: absolute;
-  inset: -4%;
-  width: 108%;
-  height: 108%;
-  background-size: cover;
-  background-position: center;
-  animation: kenburns 26s ease-in-out infinite alternate;
-}
-.placeholder-gradient--hero {
-  background-image: radial-gradient(circle at 75% 25%, rgba(168,122,74,0.28), transparent 55%), linear-gradient(135deg, #1b2a2c 0%, #2c2520 48%, #5d3e26 100%);
-  animation-duration: 32s;
-}
-.placeholder-gradient--hero:has(.screen-media__video.is-loaded) {
-  animation: none;
   inset: 0;
   width: 100%;
   height: 100%;
 }
+.placeholder-gradient--hero {
+  background: radial-gradient(ellipse at 65% 38%, rgba(168,122,74,0.16) 0%, transparent 62%), #1a1410;
+}
 .placeholder-gradient--1 {
-  background-image: radial-gradient(circle at 20% 20%, rgba(168,122,74,0.16), transparent 50%), linear-gradient(160deg, #241c16 0%, #3a2c1d 60%, #6b4a2f 100%);
-  animation-duration: 26s;
+  background: radial-gradient(ellipse at 35% 42%, rgba(168,122,74,0.10) 0%, transparent 58%), #141008;
 }
 .placeholder-gradient--2 {
-  background-image: radial-gradient(circle at 80% 20%, rgba(168,122,74,0.20), transparent 55%), linear-gradient(160deg, #16201f 0%, #1f2e2c 55%, #2f4a44 100%);
-  animation-duration: 30s;
+  background: radial-gradient(ellipse at 68% 32%, rgba(90,150,130,0.08) 0%, transparent 58%), #0d1312;
 }
 .placeholder-gradient--3 {
-  background-image: radial-gradient(circle at 50% 15%, rgba(168,122,74,0.22), transparent 55%), linear-gradient(200deg, #2a1a14 0%, #5a3320 50%, #8a5a2e 100%);
-  animation-duration: 24s;
-}
-@keyframes kenburns {
-  from { transform: scale(1) translate(0, 0); }
-  to { transform: scale(1.08) translate(-1.5%, -1.5%); }
+  background: radial-gradient(ellipse at 50% 28%, rgba(168,122,74,0.12) 0%, transparent 55%), #120f0a;
 }
 
 /* ============ Hero art (generative placeholder scene) ============ */
@@ -593,7 +576,7 @@ html.menu-open, html.menu-open body { overflow: hidden; }
    should be visible immediately instead of fading in from the abstract
    gradient placeholder underneath — that placeholder is for the tier
    videos, which have no poster of their own yet. */
-.screen-media__video--hero { opacity: 1; }
+.screen-media__video--hero { opacity: 1; filter: contrast(1.06) saturate(1.1) brightness(0.94); }
 
 .play-badge {
   display: flex;
@@ -1269,9 +1252,7 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 }
 
 /* Motion overlay chips (tier 2 / 3) */
-/* Counteracts the parent .placeholder-gradient's inset:-4%/width:108% (Ken Burns)
-   so chip percentages are relative to the visible screen, not the oversized layer. */
-.motion-overlay { position: absolute; inset: 3.7037%; z-index: 3; pointer-events: none; }
+.motion-overlay { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
 .motion-chip {
   position: absolute;
   display: flex;
