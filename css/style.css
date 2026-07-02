@@ -715,8 +715,10 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   border-color: rgba(120,115,110,0.12);
 }
 .shift-card--new {
-  background: rgba(28,18,10,0.7);
-  border-color: rgba(166,123,61,0.30);
+  background:
+    linear-gradient(90deg, transparent 4%, rgba(107,74,26,0.45) 18%, rgba(212,168,83,0.6) 50%, rgba(107,74,26,0.45) 82%, transparent 96%) top / 100% 1.5px no-repeat,
+    rgba(28,18,10,0.7);
+  border-color: rgba(166,123,61,0.10);
 }
 .shift-card::before {
   content: '';
@@ -858,7 +860,7 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  border: 1px solid rgba(166,123,61,0.35);
+  border: 1px solid rgba(166,123,61,0.18);
   color: #A67B3D;
   margin-bottom: 1.25rem;
 }
@@ -904,11 +906,22 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   flex-wrap: wrap;
   gap: 0.4rem 0.75rem;
   padding: 0.65rem 1rem;
-  border: 1px solid rgba(166,123,61,0.3);
-  border-left: 3px solid #A67B3D;
+  border: 1px solid rgba(166,123,61,0.12);
+  border-left: none;
   border-radius: 8px;
-  background: rgba(166,123,61,0.07);
+  padding-left: calc(1rem + 3px);
+  background: rgba(166,123,61,0.05);
   margin-bottom: 1.25rem;
+}
+.founding-badge::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, rgba(107,74,26,0.3), rgba(212,168,83,0.7) 50%, rgba(107,74,26,0.3));
 }
 @media (max-width: 900px) {
   .founding-badge { overflow: hidden; }
@@ -1005,7 +1018,7 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 .tier-tab:hover { color: #f6f3ee; border-color: rgba(246,243,238,0.28); background: rgba(246,243,238,0.04); }
 .tier-tab.is-active {
   background: rgba(166,123,61,0.12);
-  border-color: rgba(166,123,61,0.5);
+  border-color: rgba(166,123,61,0.3);
   color: #A67B3D;
 }
 .tier-tab.is-active .tier-tab__index { opacity: 0.8; }
@@ -1412,8 +1425,10 @@ html.menu-open, html.menu-open body { overflow: hidden; }
      distinguishable, so the "card" read as a faint smudge rather than a
      distinct object. A gradient + gold top edge gives it real presence. */
   .audience-card {
-    background: linear-gradient(160deg, #1d1813 0%, #161310 55%, #110e0b 100%);
-    border-top: 2px solid rgba(166,123,61,0.4);
+    background:
+      linear-gradient(90deg, transparent 5%, rgba(107,74,26,0.5) 18%, rgba(212,168,83,0.7) 50%, rgba(107,74,26,0.5) 82%, transparent 95%) top / 100% 1.5px no-repeat,
+      linear-gradient(160deg, #1d1813 0%, #161310 55%, #110e0b 100%);
+    border-top: none;
   }
   .audience-card__icon { box-shadow: 0 0 22px rgba(166,123,61,0.18); }
 }
@@ -1567,12 +1582,24 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 .contact__intro h2 { font-size: clamp(2rem, 4.2vw, 3.25rem); line-height: 1.12; margin-bottom: 1.25rem; text-wrap: balance; }
 .contact__intro .lead { margin-bottom: 1rem; }
 .contact__founder-note {
+  position: relative;
   font-size: 0.88rem;
   color: rgba(183,175,165,0.6);
   line-height: 1.6;
   padding: 0.9rem 1rem;
-  border-left: 2px solid rgba(166,123,61,0.3);
+  border-left: none;
+  padding-left: calc(1rem + 2px);
   margin-bottom: 1.75rem;
+}
+.contact__founder-note::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  border-radius: 1px;
+  background: linear-gradient(180deg, rgba(107,74,26,0.2), rgba(212,168,83,0.55) 50%, rgba(107,74,26,0.2));
 }
 
 .whatsapp-direct {
