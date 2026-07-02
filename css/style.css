@@ -233,7 +233,12 @@ p { margin: 0; }
   font-weight: 600;
   letter-spacing: 0.12em;
 }
-.navbar__logo-accent { color: #a87a4a; }
+.navbar__logo-accent {
+  background: linear-gradient(135deg, #6B4A1A 0%, #A67B3D 25%, #D4A853 50%, #C49440 75%, #7A5520 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .navbar__links { display: none; align-items: center; gap: 2rem; }
 .navbar__link {
   position: relative;
