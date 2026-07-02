@@ -739,7 +739,8 @@
     const embedUrl = getActiveEmbedUrl();
     if (!embedUrl) return;
     lightboxLastFocus = document.activeElement;
-    lightboxFrame.src = embedUrl;
+    const sep = embedUrl.includes('?') ? '&' : '?';
+    lightboxFrame.src = embedUrl + sep + 'vq=hd2160';
     videoLightbox.hidden = false;
     document.documentElement.classList.add('lightbox-open');
     videoLightbox.querySelector('.video-lightbox__close')?.focus();
