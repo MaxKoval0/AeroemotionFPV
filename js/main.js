@@ -77,7 +77,7 @@
     const ctx = heroCanvas.getContext('2d');
     const canHover = isDesktopPointer;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const colors = ['211,178,124', '246,231,200', '246,243,238'];
+    const colors = ['212,168,83', '242,214,122', '246,243,238'];
     /* Pre-render each sparkle color once to an offscreen sprite — the live draw
        loop then does one drawImage() per particle instead of building 5 fresh
        canvas gradients per particle every frame (the old approach could mean
@@ -231,7 +231,7 @@
         const glow = ctx.createRadialGradient(glowPos.x, glowPos.y, 0, glowPos.x, glowPos.y, r);
         glow.addColorStop(0,    'rgba(238,178,88,0.20)');
         glow.addColorStop(0.12, 'rgba(225,168,100,0.13)');
-        glow.addColorStop(0.38, 'rgba(211,178,124,0.06)');
+        glow.addColorStop(0.38, 'rgba(212,168,83,0.06)');
         glow.addColorStop(0.65, 'rgba(200,155,90,0.02)');
         glow.addColorStop(1,    'rgba(200,155,90,0)');
         ctx.fillStyle = glow;
