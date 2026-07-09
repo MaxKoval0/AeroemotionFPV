@@ -928,7 +928,7 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   box-shadow: 0 0 8px 1px rgba(212,168,83,0.2);
 }
 @media (max-width: 900px) {
-  .founding-badge { overflow: hidden; }
+  .founding-badge { overflow: hidden; margin-bottom: 0.5rem; }
   .founding-badge::after, .tier-tab.is-active::after {
     content: '';
     position: absolute;
