@@ -928,7 +928,7 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   box-shadow: 0 0 8px 1px rgba(212,168,83,0.2);
 }
 @media (max-width: 900px) {
-  .founding-badge { overflow: hidden; margin-bottom: 0.15rem; }
+  .founding-badge { overflow: hidden; margin-bottom: 0; padding: 0.45rem 0.75rem; padding-left: calc(0.75rem + 3px); gap: 0.3rem 0.5rem; }
   .founding-badge::after, .tier-tab.is-active::after {
     content: '';
     position: absolute;
@@ -1036,9 +1036,9 @@ html.menu-open, html.menu-open body { overflow: hidden; }
     overflow-y: visible;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    gap: 0.6rem;
-    margin-bottom: clamp(2rem, 5vw, 3rem);
-    margin-top: clamp(0.5rem, 1.3vw, 0.85rem);
+    gap: 0.5rem;
+    margin-bottom: 0;
+    margin-top: 0;
     padding-bottom: 4px;
     mask-image: linear-gradient(90deg, black calc(100% - 1.5rem), transparent 100%);
   }
@@ -1055,10 +1055,10 @@ html.menu-open, html.menu-open body { overflow: hidden; }
     flex-wrap: wrap;
     align-content: center;
     white-space: nowrap;
-    border-radius: 18px;
-    padding: 0.7rem 1rem;
+    border-radius: 14px;
+    padding: 0.55rem 0.85rem;
     min-height: 44px;
-    row-gap: 0.3rem;
+    row-gap: 0.15rem;
   }
   .tier-tab__label { order: -1; flex: 1 1 100%; min-width: 0; overflow: hidden; text-overflow: ellipsis; font-size: 0.95rem; }
   .tier-tab__index { order: 0; }
@@ -1355,15 +1355,11 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 
 /* Tier panels */
 .tier-panels { max-width: none; margin: 0; }
-@media (max-width: 900px) { .tier-panels { max-width: 52rem; margin: 0 auto; margin-bottom: clamp(2rem, 5vw, 3rem); } }
 .tier-panel__desc { color: rgba(183,175,165,0.9); font-size: 1rem; line-height: 1.65; margin-bottom: 1.5rem; }
 .tier-panel__list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.7rem 1.75rem;
-}
-@media (max-width: 480px) {
-  .tier-panel__list { grid-template-columns: 1fr; gap: 0.6rem; }
 }
 .tier-panel__list li {
   position: relative;
@@ -1379,7 +1375,17 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   color: #A67B3D;
 }
 .services__cta { text-align: left; }
-@media (max-width: 900px) { .services__cta { text-align: center; margin-top: clamp(2rem, 5vw, 3rem); } }
+@media (max-width: 900px) {
+  .services__layout { gap: clamp(1rem, 2.5vw, 1.5rem); }
+  .services__intro { gap: 0.6rem; }
+  .services__details { gap: 0.6rem; }
+  .services__intro .section-head h2 { margin-bottom: 0.15rem; }
+  .tier-panels { max-width: 52rem; margin: 0 auto; }
+  .tier-panel__desc { font-size: 0.92rem; line-height: 1.55; margin-bottom: 0.75rem; }
+  .tier-panel__list { grid-template-columns: 1fr; gap: 0.5rem; }
+  .tier-panel__list li { font-size: 0.88rem; padding-left: 1.3rem; }
+  .services__cta { text-align: center; margin-top: 0.25rem; }
+}
 
 /* ============ Audience ============ */
 .audience__grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
