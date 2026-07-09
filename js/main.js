@@ -1,6 +1,6 @@
 (() => {
   // Single place to update the WhatsApp number used across the page.
-  const WHATSAPP_NUMBER = '34600000000';
+  const WHATSAPP_NUMBER = '34624958195';
   document.querySelectorAll('[data-whatsapp-link]').forEach((el) => {
     const text = encodeURIComponent(el.dataset.whatsappText || '');
     el.href = `https://wa.me/${WHATSAPP_NUMBER}${text ? `?text=${text}` : ''}`;
@@ -813,7 +813,7 @@
     requestAnimationFrame(frame);
   }
 
-  /* Lead form */
+  /* Lead form — saves to Formspree (email backup), then opens WhatsApp */
   const form = document.getElementById('leadForm');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -821,6 +821,24 @@
       form.reportValidity();
       return;
     }
+    const name = form.fullName.value.trim();
+    const wa = form.whatsapp.value.trim();
+    const link = form.propertyLink.value.trim();
+    const msg = form.message.value.trim();
+
+    fetch('https://formspree.io/f/mdarrpeo', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, whatsapp: wa, property: link, message: msg })
+    }).catch(() => {});
+
+    let text = `Hi AEROEMOTION!\n\nName: ${name}\nWhatsApp: ${wa}`;
+    if (link) text += `\nProperty: ${link}`;
+    if (msg) text += `\n\n${msg}`;
+
+    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+    window.open(waUrl, '_blank', 'noopener');
+
     form.classList.add('is-submitted');
     haptic(12);
   });
