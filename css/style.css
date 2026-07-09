@@ -95,7 +95,7 @@ p { margin: 0; }
 @media (min-width: 768px) { .wrap { padding-inline: 2.5rem; } }
 
 .section { padding-block: clamp(4rem, 10vw, 8rem); }
-@media (max-width: 900px) { .section { padding-block: clamp(2rem, 5vw, 3.5rem); } }
+@media (max-width: 900px) { .section { padding-block: clamp(1.25rem, 3vw, 2rem); } }
 @media (max-width: 900px) {
   /* Every dark section sat on the exact same flat black with zero variation,
      which is what reads as cheap/flat on a small screen where you can't see
@@ -136,6 +136,7 @@ p { margin: 0; }
   color: #A67B3D;
   margin-bottom: 1rem;
 }
+@media (max-width: 900px) { .eyebrow { font-size: 0.65rem; letter-spacing: 0.14em; margin-bottom: 0.5rem; } }
 
 .lead { color: #b7afa5; font-size: 1.05rem; line-height: 1.7; }
 
@@ -1170,7 +1171,7 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   /* Keep the desktop's layered laptop+phone corner composition, just scaled
      down — and with enough reserved bottom space on the stage so the phone's
      corner overlap never bleeds past the section into Process below. */
-  .demo-stage { padding-bottom: 2.75rem; }
+  .demo-stage { padding-bottom: 0.5rem; }
   .device-phone {
     width: min(30%, 105px);
     right: 4%;
