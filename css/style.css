@@ -995,10 +995,10 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 }
 .tier-tab__price {
   margin-left: auto;
-  font-size: 0.75rem;
-  font-weight: 400;
+  font-size: 0.85rem;
+  font-weight: 600;
   font-style: italic;
-  color: rgba(183,175,165,0.5);
+  color: #f6f3ee;
   white-space: nowrap;
   padding-left: 0.5rem;
   display: inline-block;
@@ -1011,13 +1011,14 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 }
 .tier-tab__price-old {
   margin-right: 0.3em;
-  font-size: 0.85em;
-  color: rgba(183,175,165,0.4);
+  font-size: 0.8em;
+  font-weight: 400;
+  color: rgba(183,175,165,0.45);
   text-decoration: line-through;
   font-style: normal;
 }
-.tier-tab.is-active .tier-tab__price { color: rgba(166,123,61,0.65); }
-.tier-tab.is-active .tier-tab__price-old { color: rgba(183,175,165,0.45); }
+.tier-tab.is-active .tier-tab__price { color: #D4A853; }
+.tier-tab.is-active .tier-tab__price-old { color: rgba(183,175,165,0.5); }
 .tier-tab__index { font-family: 'Fraunces', serif; font-weight: 500; opacity: 0.6; min-width: 1.6rem; }
 .tier-tab:hover { color: #f6f3ee; border-color: rgba(246,243,238,0.28); background: rgba(246,243,238,0.04); }
 .tier-tab.is-active {
@@ -1064,8 +1065,8 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   .tier-tab__price { order: 1; padding-left: 0.4rem; flex-shrink: 0; margin-left: auto; }
   .tier-tab.is-active { background: #D4A853; border-color: #D4A853; color: #14110d; }
   .tier-tab.is-active .tier-tab__index { opacity: 0.7; }
-  .tier-tab.is-active .tier-tab__price { color: rgba(12,11,10,0.6); }
-  .tier-tab.is-active .tier-tab__price-old { color: rgba(12,11,10,0.4); }
+  .tier-tab.is-active .tier-tab__price { color: #14110d; }
+  .tier-tab.is-active .tier-tab__price-old { color: rgba(12,11,10,0.5); }
 }
 
 /* ============ Demo stage & device mockups ============ */
