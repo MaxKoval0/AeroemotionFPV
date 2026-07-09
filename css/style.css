@@ -928,7 +928,7 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   box-shadow: 0 0 8px 1px rgba(212,168,83,0.2);
 }
 @media (max-width: 900px) {
-  .founding-badge { overflow: hidden; margin-bottom: 0.5rem; }
+  .founding-badge { overflow: hidden; margin-bottom: 0.15rem; }
   .founding-badge::after, .tier-tab.is-active::after {
     content: '';
     position: absolute;
@@ -996,7 +996,7 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 .tier-tab__price {
   margin-left: auto;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 400;
   font-style: italic;
   color: #f6f3ee;
   white-space: nowrap;
@@ -1038,7 +1038,7 @@ html.menu-open, html.menu-open body { overflow: hidden; }
     -webkit-overflow-scrolling: touch;
     gap: 0.6rem;
     margin-bottom: clamp(2rem, 5vw, 3rem);
-    margin-top: clamp(1.5rem, 4vw, 2.5rem);
+    margin-top: clamp(0.5rem, 1.3vw, 0.85rem);
     padding-bottom: 4px;
     mask-image: linear-gradient(90deg, black calc(100% - 1.5rem), transparent 100%);
   }
