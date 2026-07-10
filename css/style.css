@@ -411,12 +411,16 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   90%  { opacity: 1; }
   100% { cx: 1650px; cy: 240px; opacity: 0; }
 }
+@media (max-width: 900px) {
+  .hero__art { display: none; }
+  .hero__content::after { filter: none; }
+}
 
 /* ============ Hero ============ */
 .hero {
   position: relative;
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100svh;
   display: flex;
   align-items: flex-end;
   overflow: hidden;

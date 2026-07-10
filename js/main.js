@@ -46,8 +46,10 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* Hero parallax — background layers drift at different speeds on scroll */
-  if (!reduceMotion) {
+  /* Hero parallax — background layers drift at different speeds on scroll.
+     Disabled on mobile: the SVG art is hidden there, and the scroll-event
+     handler with per-frame transforms causes jank on lower-end devices. */
+  if (!reduceMotion && window.innerWidth > 900) {
     const parallaxLayers = [
       { el: document.querySelector('.hero-art__ridge--back'), speed: 18 },
       { el: document.querySelector('.hero-art__ridge--front'), speed: 40 },
@@ -163,7 +165,7 @@
          inside the draw loop. This only needs to handle the parts that
          should stay rare: re-measuring where the heading sits, and
          reshuffling the particle field to match. */
-      syncCanvasResolution();
+      syncCanvasResolution(true);
       const contentEl = heroEl.querySelector('.hero__content');
       if (contentEl && height > 0) {
         const rootFS = parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -188,9 +190,10 @@
       ctx.restore();
     };
 
-    const syncCanvasResolution = () => {
+    const syncCanvasResolution = (forceHeight) => {
       const rect = heroEl.getBoundingClientRect();
-      if (Math.abs(rect.width - width) < 0.5 && Math.abs(rect.height - height) < 0.5) return;
+      const widthChanged = Math.abs(rect.width - width) > 0.5;
+      if (!widthChanged && !forceHeight) return;
       width = rect.width;
       height = rect.height;
       heroCanvas.width = width * dpr;
@@ -198,9 +201,12 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
-    /* Use ResizeObserver instead of per-frame getBoundingClientRect —
-       avoids forced layout recalc every frame during scroll. */
-    new ResizeObserver(() => syncCanvasResolution()).observe(heroEl);
+    new ResizeObserver((entries) => {
+      const entry = entries[0];
+      const w = entry.contentRect.width;
+      const widthChanged = Math.abs(w - width) > 0.5;
+      if (widthChanged) syncCanvasResolution(true);
+    }).observe(heroEl);
 
     const draw = (t) => {
       ctx.clearRect(0, 0, width, height);
@@ -282,11 +288,6 @@
     let resizeQueued = false;
     let lastWidth = window.innerWidth;
     window.addEventListener('resize', () => {
-      /* Mobile browsers fire resize when the address bar collapses/expands
-         on scroll — that only changes height, not width. Rebuilding the
-         canvas (and every particle's position) on that would make the
-         whole field flicker and reshuffle on every swipe. Only width
-         changes (real rotation/window resize) should trigger a rebuild. */
       if (window.innerWidth === lastWidth) return;
       lastWidth = window.innerWidth;
       if (resizeQueued) return;
@@ -309,9 +310,24 @@
       });
     }
 
+    let heroVisible = false;
     new IntersectionObserver((entries) => {
-      entries.forEach((entry) => (entry.isIntersecting ? start() : stop()));
+      entries.forEach((entry) => {
+        heroVisible = entry.isIntersecting;
+        if (heroVisible && !scrollPaused) start(); else stop();
+      });
     }, { threshold: 0 }).observe(heroEl);
+
+    let scrollPaused = false;
+    let scrollTimer = 0;
+    if (!canHover) {
+      window.addEventListener('scroll', () => {
+        if (!heroVisible) return;
+        if (!scrollPaused) { scrollPaused = true; stop(); }
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => { scrollPaused = false; if (heroVisible) start(); }, 180);
+      }, { passive: true });
+    }
   }
 
   /* Mobile menu — full-screen overlay with body scroll lock */
