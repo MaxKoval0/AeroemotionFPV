@@ -189,16 +189,6 @@
     };
 
     const syncCanvasResolution = () => {
-      /* .hero uses min-height:100dvh, which tracks the *live* visual
-         viewport — it genuinely changes height as the mobile browser's
-         address bar collapses/expands mid-scroll, not just once at the
-         end. The canvas's CSS size follows that instantly (pure CSS), but
-         its drawing-buffer resolution only matches what this set last —
-         if that goes stale even briefly, the existing bitmap gets stretched
-         to fill the new CSS size, which reads as the particles "drifting".
-         Checking every frame (cheap: no particle rebuild, just a resize of
-         the buffer) keeps the buffer pixel-matched continuously, so there's
-         never a stretched frame to see. */
       const rect = heroEl.getBoundingClientRect();
       if (Math.abs(rect.width - width) < 0.5 && Math.abs(rect.height - height) < 0.5) return;
       width = rect.width;
@@ -208,8 +198,11 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
+    /* Use ResizeObserver instead of per-frame getBoundingClientRect —
+       avoids forced layout recalc every frame during scroll. */
+    new ResizeObserver(() => syncCanvasResolution()).observe(heroEl);
+
     const draw = (t) => {
-      syncCanvasResolution();
       ctx.clearRect(0, 0, width, height);
 
       if (canHover && pointer.x > -999) {
@@ -375,6 +368,36 @@
       splitWords(heading);
     });
   }
+
+  /* Auto-fit section headings on mobile — find the largest font-size that
+     keeps each heading to ≤ 2 lines, so every heading fills its full width
+     regardless of text length or viewport size. */
+  const fitHeadings = () => {
+    if (window.innerWidth > 900) {
+      document.querySelectorAll('.section-head h2, .contact__intro h2').forEach(h => { h.style.fontSize = ''; });
+      return;
+    }
+    document.querySelectorAll('.section-head h2, .contact__intro h2').forEach(h => {
+      h.style.fontSize = '';
+      let lo = 22, hi = 52;
+      while (hi - lo > 0.5) {
+        const mid = (lo + hi) / 2;
+        h.style.fontSize = mid + 'px';
+        const lh = mid * 1.12;
+        const lines = Math.round(h.getBoundingClientRect().height / lh);
+        if (lines <= 2) lo = mid; else hi = mid;
+      }
+      h.style.fontSize = lo + 'px';
+    });
+  };
+  fitHeadings();
+  document.fonts.ready.then(fitHeadings);
+  let fitQueued = false;
+  window.addEventListener('resize', () => {
+    if (fitQueued) return;
+    fitQueued = true;
+    requestAnimationFrame(() => { fitHeadings(); fitQueued = false; });
+  });
 
   /* Reveal-on-scroll */
   const revealEls = document.querySelectorAll('.reveal');
