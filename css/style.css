@@ -297,6 +297,20 @@ p { margin: 0; }
 .navbar__link.is-active { color: #f6f3ee; }
 .navbar__link.is-active::after { transform: scaleX(1); }
 .navbar__cta { margin-left: 0.5rem; }
+
+.lang-switch { display: flex; gap: 0.1rem; align-items: center; margin-left: auto; }
+.lang-switch__link {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(246,243,238,0.4);
+  padding: 0.2rem 0.3rem;
+  border-radius: 0.2rem;
+  transition: color 0.2s, background 0.2s;
+}
+.lang-switch__link:hover { color: #f6f3ee; }
+.lang-switch__link.is-active { color: #f6f3ee; background: rgba(166,123,61,0.18); }
 .navbar__toggle {
   display: flex;
   align-items: center;
@@ -338,6 +352,19 @@ p { margin: 0; }
   border-bottom: 1px solid rgba(246,243,238,0.08);
 }
 .mobile-menu__cta { margin-top: 1.75rem; justify-content: center; padding: 1rem 1.75rem; min-height: 48px; }
+.mobile-menu__lang {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+.mobile-menu__lang .lang-switch__link {
+  font-size: 0.85rem;
+  padding: 0.5rem 0.9rem;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
 html.menu-open, html.menu-open body { overflow: hidden; }
 
 @media (min-width: 1024px) {
@@ -1849,3 +1876,10 @@ html.lightbox-open, html.lightbox-open body { overflow: hidden; }
 .video-lightbox__close:hover, .video-lightbox__close:focus-visible { border-color: #A67B3D; color: #D4A853; }
 .video-lightbox__close:active { transform: scale(0.92); }
 .footer__legal-links a:hover { color: #b7afa5; }
+
+/* ============ Russian font overrides ============ */
+:lang(ru) body { font-family: 'Inter', system-ui, sans-serif; }
+:lang(ru) h1, :lang(ru) h2, :lang(ru) h3, :lang(ru) h4 { font-family: 'Cormorant', serif; }
+:lang(ru) .navbar__logo { font-family: 'Fraunces', serif; }
+:lang(ru) .mobile-menu__link { font-family: 'Cormorant', serif; }
+:lang(ru) .lang-switch__link { font-family: 'Inter', system-ui, sans-serif; }
